@@ -32,7 +32,6 @@ def is_solvable(board):
         for val2 in f_board[i + 1:]:
             if val1 > val2:
                 count += 1
-    print(count)
     return count % 2 == 0 
 
 class Board:
@@ -125,10 +124,8 @@ def bfs(start):
                 if tupl not in seen:
                     q.append(tupl)
         depth += 1
-        if depth % 3 == 0:
-            print(depth)
     return "no solutions"
 
 # b = ((2,0,1,3),(4,5,6,7), (8,9,10,11), (12,13,14,15))
-b = (2,0,1)
-# print(bfs(b))
+b = ((2,0,1), (3,4,5))
+print(bfs(b))
