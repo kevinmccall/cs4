@@ -1,4 +1,5 @@
 from collections import deque
+import heapq
 
 def create_2d_array(rows, cols, val=None):
     ret = []
@@ -35,20 +36,23 @@ def is_solvable(board):
     return count % 2 == 0 
 
 class Board:
-    def __init__(self, vals) -> None:
+    def __init__(self, vals, depth, parent=None) -> None:
         self.rows = len(vals)
         self.cols = len(vals[0])
         self.board = create_2d_array(self.rows, self.cols)
-        self.dist = create_2d_array(self.rows, self.cols)
+        self.dist = 0
         copy_2d_array(vals, self.board)
         self.hole_pos = self.find_zero()
         self.set_dist()
+        self.depth = depth
+        self.parent = parent
         assert self.hole_pos is not None
     
     def pos_to_ij(self, val):
         return val // self.cols, val % self.cols
     
     def set_dist(self):
+        self.dist = 0
         for i, row in enumerate(self.board):
             for j, val in enumerate(row):
                 i2, j2 = self.pos_to_ij(val)
@@ -56,15 +60,12 @@ class Board:
                 assert 0 <= j2 < self.cols
                 idiff = abs(i2 - i)
                 jdiff = abs(j2 - j)
-                self.dist[i][j] = idiff + jdiff
+                self.dist += idiff + jdiff
     
-    def calculate_dist(self):
-        da_sum = 0
-        for row in self.dist:
-            for val in row:
-                da_sum += val
-        return da_sum
-
+    def update_dist(self, new_hole_i, new_hole_j, new_swap_i, new_swap_j):
+        # TODO make +2 0 -2 optimization
+        pass
+        
     
     def get_tuple_representation(self):
         tuple_holder = []
@@ -104,10 +105,12 @@ class Board:
 def bfs(start):
     if not is_solvable(start):
         return "no solutions"
-    q = deque()
+    heap = []
     seen = set()
-    q.append(start)
+    board = Board(start, 0)
+    heapq.heappush((board.dist, board))
     depth = 0
+<<<<<<< HEAD
     while len(q) > 0:
         for _ in range(len(q)):
             tuple_board = q.popleft()
@@ -124,6 +127,21 @@ def bfs(start):
                 if tupl not in seen:
                     q.append(tupl)
         depth += 1
+=======
+    while len(heap) > 0:
+        depth, board = heapq.heappop(heap)
+        seen.add(board.get_tuple_representation())
+        if board.calculate_dist() == 0:
+            return depth
+        for move in board.get_possible_moves():
+            n_board = Board(board.board)
+            swapi, swapj = move
+            holei, holej = board.hole_pos
+            n_board.swap(swapi, swapj, holei, holej)
+            tupl = n_board.get_tuple_representation()
+            if tupl not in seen:
+                heapq.heappush((n_board.dist + board.depth + 1, n_board))
+>>>>>>> f328fde (switching branches)
     return "no solutions"
 
 # b = ((2,0,1,3),(4,5,6,7), (8,9,10,11), (12,13,14,15))
