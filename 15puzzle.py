@@ -113,8 +113,7 @@ def search(start):
     seen = set()
     counter = 0
     board = Board(start, 0)
-    heapq.heappush(heap, (counter, board.dist, board))
-    depth = 0
+    heapq.heappush(heap, (board.dist, counter, board))
     while len(heap) > 0:
         _, _, board = heapq.heappop(heap)
         seen.add(board.get_tuple_representation())
