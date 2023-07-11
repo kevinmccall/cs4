@@ -115,24 +115,6 @@ def search(start):
     board = Board(start, 0)
     heapq.heappush(heap, (counter, board.dist, board))
     depth = 0
-<<<<<<< HEAD
-    while len(q) > 0:
-        for _ in range(len(q)):
-            tuple_board = q.popleft()
-            seen.add(tuple_board)
-            board = Board(tuple_board)
-            if board.calculate_dist() == 0:
-                return depth
-            for move in board.get_possible_moves():
-                board = Board(tuple_board)
-                swapi, swapj = move
-                holei, holej = board.hole_pos
-                board.swap(swapi, swapj, holei, holej)
-                tupl = board.get_tuple_representation()
-                if tupl not in seen:
-                    q.append(tupl)
-        depth += 1
-=======
     while len(heap) > 0:
         _, _, board = heapq.heappop(heap)
         seen.add(board.get_tuple_representation())
@@ -147,15 +129,6 @@ def search(start):
             n_board.set_dist()
             tupl = n_board.get_tuple_representation()
             if tupl not in seen:
-<<<<<<< HEAD
-                heapq.heappush((n_board.dist + board.depth + 1, n_board))
->>>>>>> f328fde (switching branches)
-    return "no solutions"
-
-# b = ((2,0,1,3),(4,5,6,7), (8,9,10,11), (12,13,14,15))
-b = ((2,0,1), (3,4,5))
-print(bfs(b))
-=======
                 data = (n_board.dist + n_board.depth, counter, n_board)
                 heapq.heappush(heap, data)
     return "no solutions"
@@ -163,4 +136,3 @@ print(bfs(b))
 b = ((2,0,1,3),(4,5,6,7), (8,9,10,11), (12,13,14,15))
 # b = ((2,0,1), (3,4,5))
 print(search(b))
->>>>>>> 70bfdb4 (got a-star working)
