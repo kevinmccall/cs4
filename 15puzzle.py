@@ -17,6 +17,10 @@ def flatten_board(board):
             ret.append(val)
     return ret
 
+def pretty_print(board):
+    for row in board:
+        print(row)
+
 def copy_2d_array(from_arr, to_arr):
     assert len(from_arr) == len(to_arr)
     assert len(from_arr[0]) == len(to_arr[0])
@@ -102,13 +106,14 @@ class Board:
         self.board[pos1i][pos1j], self.board[pos2i][pos2j] = self.board[pos2i][pos2j], self.board[pos1i][pos1j]
     
 
-def bfs(start):
+def search(start):
     if not is_solvable(start):
         return "no solutions"
     heap = []
     seen = set()
+    counter = 0
     board = Board(start, 0)
-    heapq.heappush((board.dist, board))
+    heapq.heappush(heap, (counter, board.dist, board))
     depth = 0
 <<<<<<< HEAD
     while len(q) > 0:
@@ -129,17 +134,20 @@ def bfs(start):
         depth += 1
 =======
     while len(heap) > 0:
-        depth, board = heapq.heappop(heap)
+        _, _, board = heapq.heappop(heap)
         seen.add(board.get_tuple_representation())
-        if board.calculate_dist() == 0:
-            return depth
+        if board.dist == 0:
+            return board.depth
         for move in board.get_possible_moves():
-            n_board = Board(board.board)
+            counter += 1
+            n_board = Board(board.board, board.depth + 1, board)
             swapi, swapj = move
             holei, holej = board.hole_pos
             n_board.swap(swapi, swapj, holei, holej)
+            n_board.set_dist()
             tupl = n_board.get_tuple_representation()
             if tupl not in seen:
+<<<<<<< HEAD
                 heapq.heappush((n_board.dist + board.depth + 1, n_board))
 >>>>>>> f328fde (switching branches)
     return "no solutions"
@@ -147,3 +155,12 @@ def bfs(start):
 # b = ((2,0,1,3),(4,5,6,7), (8,9,10,11), (12,13,14,15))
 b = ((2,0,1), (3,4,5))
 print(bfs(b))
+=======
+                data = (n_board.dist + n_board.depth, counter, n_board)
+                heapq.heappush(heap, data)
+    return "no solutions"
+
+b = ((2,0,1,3),(4,5,6,7), (8,9,10,11), (12,13,14,15))
+# b = ((2,0,1), (3,4,5))
+print(search(b))
+>>>>>>> 70bfdb4 (got a-star working)
