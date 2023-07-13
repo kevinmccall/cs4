@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Sliding Puzzle Solvability Tester</h1>
+
+      <!-- Things we will use
+      1. Drop-down Menus
+      2. Text Area inputs -->
+
+        <div class='jumbotron'>
+            <form method="get">
+          
+            <p>What is the configuration of your 15-puzzle? Write numbers row by row, from up to down. </p>
+
+            <textarea name="puzzle" rows="8" cols="80"></textarea>
+
+            <p>Do you think the corresponding configuration is a solvable 15-puzzle?</p>
+            <select name="user_choice">
+                <option value="not sure">I'm not sure</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option> 
+            </select>
+          
+            <input type="submit" name="" value="Submit Feedback">
+    
+            
+        </form>
+        {% block content %}
+        {% endblock %}
+    </div>
+  </body>
+</html>

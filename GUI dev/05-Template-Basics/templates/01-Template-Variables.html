@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Basic</title>
+  </head>
+  <body>
+    <h1>Basic variable insert: {{name}}!</h1>
+    <!-- Variables name, mylist, mydict are defined in .py file. -->
+    
+    <h1>List example: {{mylist}}</h1>
+    <!-- We can index the list as well -->
+    <h1>Indexing the list for the first letter: {{mylist[0]}}</h1>
+    <!-- We can also use dictionaries -->
+    <h1>User name from dictionary: {{mydict['user_name']}}</h1>
+
+    <!-- Use %% instead of {} for control flow blocks-->
+    <ul>
+      {%for item in mylist %}
+      <li>{{item}}</li>
+      {% endfor %}
+
+      {% if 'J' in mylist%}
+      <p> J is in user name </p>
+      {%else%}
+      <p> J is not in user name </p>
+      {%endif%}
+
+    </ul>
+
+
+  </body>
+</html>
