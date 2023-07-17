@@ -1,5 +1,24 @@
 {% extends "base.html"%}
 {% block content %}
-<h1>Here is your puzzle {{puzzle}}!</h1>
-<p>Here is your guess {{guess}}</p>
+<div class="jumbotron">
+    <form action="{{url_for('result_page')}}">
+          
+        <p>What is the configuration of your 15-puzzle? Write numbers row by row, from up to down. </p>
+        <label for="puzzle"> Puzzle: </label>
+        <!--<input type="text" name="puzzle">-->
+        <textarea name="puzzle" rows="8" cols="80"></textarea>
+
+        <p>Do you think the corresponding configuration is a solvable 15-puzzle?</p>
+        <select name="user_choice">
+            <option value="not sure">I'm not sure</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option> 
+        </select>
+        
+        <input type="submit" name="" value="Submit Feedback">
+
+        
+      </form>
+
+</div>
 {% endblock %}

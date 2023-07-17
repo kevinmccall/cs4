@@ -2,35 +2,30 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" 
+        crossorigin="anonymous">
+    <title>Home Page</title>
   </head>
   <body>
-    <h1>Sliding Puzzle Solvability Tester</h1>
-
-      <!-- Things we will use
-      1. Drop-down Menus
-      2. Text Area inputs -->
-
-        <div class='jumbotron'>
-            <form method="get">
-          
-            <p>What is the configuration of your 15-puzzle? Write numbers row by row, from up to down. </p>
-
-            <textarea name="puzzle" rows="8" cols="80"></textarea>
-
-            <p>Do you think the corresponding configuration is a solvable 15-puzzle?</p>
-            <select name="user_choice">
-                <option value="not sure">I'm not sure</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option> 
-            </select>
-          
-            <input type="submit" name="" value="Submit Feedback">
+    <div class= "container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{url_for('index')}}">Home Page</a>
+      </nav>
     
-            
-        </form>
-        {% block content %}
-        {% endblock %}
-    </div>
+            {% block content %}
+            {% endblock %}
+        
+        
+      </div>
+
+    <script 
+     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" 
+     crossorigin="anonymous">
+     </script>
   </body>
 </html>

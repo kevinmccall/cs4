@@ -17,11 +17,14 @@
     <!-- Use %% instead of {} for control flow blocks-->
     <ul>
       {%for item in mylist %}
-      <li>{{item}}</li>
+      <li>{{item.upper()}}
+      <img src="../static/cat_pic.jpg" width="50" height="50" alt="nocat">
+      </li>
       {% endfor %}
 
       {% if 'J' in mylist%}
       <p> J is in user name </p>
+      
       {%else%}
       <p> J is not in user name </p>
       {%endif%}

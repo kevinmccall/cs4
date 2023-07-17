@@ -25,7 +25,7 @@ def user_name(name):
     user_dict = {'user_name':name}
     return render_template('01-Template-Variables.html',
                            name=name,mylist=letters,mydict=user_dict)
-
+    
 
 if __name__ == '__main__':
     app.run(debug=True)

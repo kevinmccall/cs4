@@ -2,6 +2,8 @@
 {% block content %}
 <h1>This is the page customized for the user: {{name|capitalize}}.</h1>
 <h2><a href="{{url_for('index')}}">Home Page</a></h2>
+<h2><a href="{{url_for('static', filename='cat_pic.jpg')}}"></a></h2>
+<h3>hello</h3>
 <!-- 
     Note that the url_for function takes a string containing the view function name.
     For static files href, use the same syntax with url_for('static', filename='cat_pic.jpg')

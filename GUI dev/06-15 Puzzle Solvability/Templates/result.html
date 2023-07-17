@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="jumbotron">
+        <h1>The puzzle you test is: {{puzzle}}!</h1>
+        <p>The puzzle is indeed {{solvability_result}}</p>
+        <p>{{nice_message}}</p>
+    </div>
+
+{% endblock %}
