@@ -28,8 +28,11 @@ def combine_arr(arr1, arr2):
 
 def calc_probabilities(board: list[list[str]], die_colors, die_possibilites):
     counts = Counter()
-    for c in die_colors:
-        counts[c] = 0
+    camels = Counter()
+    for color in die_colors:
+        camels[color] = Counter()
+    for color in die_colors:
+        counts[color] = 0
     for ordering in generate_die_orderings(die_colors):
         for die_sequence in combine_arr(ordering, die_possibilites):
             b_copy = deepcopy(board)
@@ -37,7 +40,9 @@ def calc_probabilities(board: list[list[str]], die_colors, die_possibilites):
                 color, move = die
                 update_board(b_copy, color, move)
             counts[md_list_to_tuple(b_copy)] += 1
-    return counts
+            for i, camel in enumerate(get_camel_order(b_copy)):
+                camels[camel][len(die_colors) - i] += 1
+    return camels
 
 def update_board(board: list[list[str]], color, move):
     for spot_i, spot in enumerate(board):
@@ -47,13 +52,19 @@ def update_board(board: list[list[str]], color, move):
                 board[spot_i] = board[spot_i][:camel_spot]
                 return
 
-
+def get_camel_order(board: list[list[str]]):
+    res = []
+    for spot in board:
+        for camel in spot:
+            res.append(camel)
+    return res
+            
 
 if __name__ == '__main__':
     b = generate_board(15)
     b[0] = ['r', 'g', 'b']
     b[1] = ['y', 'p']
     res = calc_probabilities(b, ['r', 'g', 'b', 'y', 'p'], list(range(1,4)))
-    print(f"{res.values()=}")
-    print(sum(res.values()))
-    print(max(res.values()))
+    # print(f"{res=}")
+    for camel, stats in res.items():
+        print(camel, stats)
