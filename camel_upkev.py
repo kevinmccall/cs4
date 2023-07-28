@@ -29,6 +29,7 @@ def combine_arr(arr1, arr2):
 def calc_probabilities(board: list[list[str]], die_colors, die_possibilites):
     counts = Counter()
     camels = Counter()
+    winning_chances = {}
     for color in die_colors:
         camels[color] = Counter()
     for color in die_colors:
@@ -42,7 +43,9 @@ def calc_probabilities(board: list[list[str]], die_colors, die_possibilites):
             counts[md_list_to_tuple(b_copy)] += 1
             for i, camel in enumerate(get_camel_order(b_copy)):
                 camels[camel][len(die_colors) - i] += 1
-    return camels
+    for camel in die_colors:
+        winning_chances[camel] = camels[camel][1] / (sum(camels[camel].values()))
+    return winning_chances
 
 def update_board(board: list[list[str]], color, move):
     for spot_i, spot in enumerate(board):
@@ -68,3 +71,4 @@ if __name__ == '__main__':
     # print(f"{res=}")
     for camel, stats in res.items():
         print(camel, stats)
+        sum += stats
